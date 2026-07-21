@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FunnyWorld — Bilder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <nav>
+        <a class="nav-logo" href="index.html">FunnyWorld</a>
+        <div class="nav-links">
+            <a class="nav-link" href="index.html">Home</a>
+            <a class="nav-link" href="download.html">Download</a>
+            <a class="nav-link active" href="bilder.html">Bilder</a>
+        </div>
+    </nav>
+
+    <div class="page">
+
+        <section class="hero" style="padding-top: 56px;">
+            <span class="eyebrow">Galerie</span>
+            <h1>Die Welten von FunnyWorld</h1>
+            <p class="tagline">Klick auf ein Bild, um es größer anzusehen.</p>
+        </section>
+
+        <section style="margin-top: 24px;">
+            <div class="bilder-container">
+                <div class="bild-card" data-src="Bilder/funny_world_menue.png">
+                    <img src="Bilder/funny_world_menue.png" alt="Menü" loading="lazy">
+                    <div class="bild-label">Hauptmenü</div>
+                </div>
+                <div class="bild-card" data-src="Bilder/funny_world_eis.png">
+                    <img src="Bilder/funny_world_eis.png" alt="Eis-Welt" loading="lazy">
+                    <div class="bild-label">Eis-Welt</div>
+                </div>
+                <div class="bild-card" data-src="Bilder/funny_world_lava.png">
+                    <img src="Bilder/funny_world_lava.png" alt="Lava-Welt" loading="lazy">
+                    <div class="bild-label">Lava-Welt</div>
+                </div>
+                <div class="bild-card" data-src="Bilder/funny_world_tempel.png">
+                    <img src="Bilder/funny_world_tempel.png" alt="Tempel-Welt" loading="lazy">
+                    <div class="bild-label">Tempel-Welt</div>
+                </div>
+                <div class="bild-card" data-src="Bilder/funny_world_wasser.png">
+                    <img src="Bilder/funny_world_wasser.png" alt="Wasser-Welt" loading="lazy">
+                    <div class="bild-label">Wasser-Welt</div>
+                </div>
+                <div class="bild-card" data-src="Bilder/funny_world_wueste.png">
+                    <img src="Bilder/funny_world_wueste.png" alt="Wüsten-Welt" loading="lazy">
+                    <div class="bild-label">Wüsten-Welt</div>
+                </div>
+                <div class="bild-card" data-src="Bilder/funny_world_weltall.png">
+                    <img src="Bilder/funny_world_weltall.png" alt="Weltall" loading="lazy">
+                    <div class="bild-label">Weltall</div>
+                </div>
+                <div class="bild-card" data-src="Bilder/funny_world_arena.png">
+                    <img src="Bilder/funny_world_arena.png" alt="Arena" loading="lazy">
+                    <div class="bild-label">Arena (Boss)</div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        FunnyWorld — ein kleines Jump'n'Run-Projekt.
+    </footer>
+
+    <div id="overlay"></div>
+    <div id="vergroessertesBild">
+        <img id="grossesBild" src="" alt="Vergrößertes Bild">
+    </div>
+
+    <script>
+        // Einfache Lightbox ohne externe Abhängigkeiten
+        const karten = document.querySelectorAll(".bild-card");
+        const overlay = document.getElementById("overlay");
+        const grossBox = document.getElementById("vergroessertesBild");
+        const grossBild = document.getElementById("grossesBild");
+
+        function bildOeffnen(src) {
+            grossBild.src = src;
+            overlay.style.display = "block";
+            grossBox.style.display = "block";
+        }
+
+        function bildSchliessen() {
+            overlay.style.display = "none";
+            grossBox.style.display = "none";
+        }
+
+        karten.forEach((karte) => {
+            karte.addEventListener("click", () => bildOeffnen(karte.dataset.src));
+        });
+
+        overlay.addEventListener("click", bildSchliessen);
+        grossBox.addEventListener("click", bildSchliessen);
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") bildSchliessen();
+        });
+    </script>
+
+</body>
+</html>
